@@ -1,0 +1,65 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Node exercises",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/ --cache --fix",
+    "test": "jest",
+    "format": "prettier --write .",
+    "build": "tsc",
+    "build:dev": "tsc --watch",
+    "start": "node --enable-source-maps dist/server.js",
+    "start:dev": "nodemon --watch dist/ --watch .env",
+    "dev": "npm run build && concurrently 'npm:build:dev' 'npm:start:dev'",
+    "go": "nodemon index.ts",
+    "web": "serve -p 8080 web/"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philip-morris-89/node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philip-morris-89/node/issues"
+  },
+  "homepage": "https://github.com/philip-morris-89/node#readme",
+  "dependencies": {
+    "@prisma/client": "^4.8.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "figlet": "^1.5.2",
+    "cors": "^2.8.5",
+    "mime": "^3.0.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^1.0.1",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "@types/mime": "^3.0.1",
+    "@types/multer": "^1.4.7",
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "concurrently": "^7.6.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "prettier": "2.8.2",
+    "prisma": "^4.8.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.9.4",
+    "ts-node": "^10.9.1",
+    "serve": "^14.1.2"
+  }
+}
