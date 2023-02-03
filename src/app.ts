@@ -1,18 +1,15 @@
 import express from "express";
-import cors from "cors";
 import planetsRoutes from "./routes/planets";
 
-const corsOption = {
-  origin: "http://localhost:8080",
-};
+import { initCorsMiddleware } from "./lib/middleware/cors";
 
 const app = express();
 
 app.use(express.json());
 
-app.use(cors(corsOption));
+app.use(initCorsMiddleware);
 
-app.use("/plantes", planetsRoutes);
+app.use("/planets", planetsRoutes);
 
 app.listen(3000, () => {
   console.log("Running on port", 3000);
