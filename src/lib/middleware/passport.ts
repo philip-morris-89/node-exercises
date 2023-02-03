@@ -1,12 +1,13 @@
 import passport from "passport";
 import passportGitHub2 from "passport-github2";
+import config from "../../config";
 import { RequestHandler } from "express";
 
 const githubStrategy = new passportGitHub2.Strategy(
   {
-    clientID: "358a3db9af0e863780e2",
-    clientSecret: "6817c95fce6bddd8a76f5138db1fe581f3861dcd",
-    callbackURL: "http://localhost:3000/auth/github/callback",
+    clientID: config.GITHUB_CLIED_ID,
+    clientSecret: config.GITHUB_CLIED_SECRET,
+    callbackURL: config.GITHUB_CALLBACK_URL,
   },
   function (
     accessToken: string,
