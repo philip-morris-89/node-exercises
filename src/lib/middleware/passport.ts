@@ -5,8 +5,8 @@ import { RequestHandler } from "express";
 
 const githubStrategy = new passportGitHub2.Strategy(
   {
-    clientID: config.GITHUB_CLIED_ID,
-    clientSecret: config.GITHUB_CLIED_SECRET,
+    clientID: config.GITHUB_CLIENT_ID,
+    clientSecret: config.GITHUB_CLIENT_SECRET,
     callbackURL: config.GITHUB_CALLBACK_URL,
   },
   function (

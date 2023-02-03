@@ -1,7 +1,11 @@
 import express, { Router } from "express";
 import { PrismaClient } from "@prisma/client";
-// import { validate, planetSchema, PlanetData } from "../lib/validation";
-// import { checkAuthorization } from "../lib/middleware/passport";
+import {
+  validate,
+  planetSchema,
+  PlanetData,
+} from "../lib/middleware/validation";
+import { checkAuthorization } from "../lib/middleware/passport";
 import { initMulterMiddleware } from "../lib/middleware/multer";
 
 const prisma = new PrismaClient();
@@ -51,11 +55,55 @@ router.put("/:id", async (request, response) => {
   response.json(planet);
 });
 
-router.delete("/:id", async (request, response) => {
-  const planetId = request.params.id;
+router.post(
+  "/",
+  checkAuthorization,
+  validate({ body: planetSchema }),
+  async (request, response) => {
+    const planetData: PlanetData = request.body;
+    //@ts-ignore
+    const username = request.user?.username as string;
+
+    const planet = await prisma.planet.create({
+      data: {
+        ...planetData,
+        createdBy: username,
+        updatedBy: username,
+      },
+    });
+
+    response.json(planet);
+  }
+);
+
+// PUT
+
+router.put("/:id", checkAuthorization, async (request, response) => {
+  const { id } = request.params;
+  const { name, diameter, moons } = request.body;
+  //@ts-ignore
+  const username = request.user?.username as string;
+  const planet = await prisma.planet.update({
+    where: {
+      id: Number(id),
+    },
+    data: {
+      name,
+      diameter,
+      moons,
+      updatedBy: username,
+    },
+  });
+  response.json(planet);
+});
+
+// DELETE
+
+router.delete("/:id", checkAuthorization, async (request, response) => {
+  const { id } = request.params;
   const planet = await prisma.planet.delete({
     where: {
-      id: Number(planetId),
+      id: Number(id),
     },
   });
   response.json(planet);
@@ -63,6 +111,7 @@ router.delete("/:id", async (request, response) => {
 
 router.post(
   "/:id(\\d+)/photo",
+  checkAuthorization,
   upload.single("photo"),
   async (request, response, next) => {
     console.log("request.file", request.file);

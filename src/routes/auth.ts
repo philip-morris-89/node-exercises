@@ -9,6 +9,7 @@ router.get("/login", (req, res, next) => {
     return next("Missing redirectTo query string parameter");
   }
 
+  //@ts-ignore
   req.session.redirectTo = req.query.redirectTo;
 
   res.redirect("/auth/github/login");
@@ -44,6 +45,7 @@ router.get("/logout", (req, res, next) => {
     return next("Missing redirectTo query string parameter");
   }
 
+  //@ts-ignore
   const redirectUrl = req.query.redirectTo;
 
   req.logOut((error) => {

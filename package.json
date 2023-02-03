@@ -9,10 +9,9 @@
     "format": "prettier --write .",
     "build": "tsc",
     "build:dev": "tsc --watch",
-    "start": "node --enable-source-maps dist/server.js",
+    "start": "nodemon index.ts",
     "start:dev": "nodemon --watch dist/ --watch .env",
     "dev": "npm run build && concurrently 'npm:build:dev' 'npm:start:dev'",
-    "go": "nodemon index.ts",
     "web": "serve -p 8080 web/"
   },
   "engines": {
