@@ -1,17 +1,19 @@
 import express from "express";
-import "express-async-errors";
-import { PrismaClient } from "@prisma/client";
+import cors from "cors";
+import planetsRoutes from "./routes/planets";
 
-const prisma = new PrismaClient();
+const corsOption = {
+  origin: "http://localhost:8080",
+};
 
 const app = express();
 
-app.get("/planets", async (request, response) => {
-  //  response.send("Up and running!");
-  // response.json([{ name: "Jupiter" }, { name: "Mars" }]);
-  const planets = await prisma.planet.findMany();
+app.use(express.json());
 
-  response.json(planets);
+app.use(cors(corsOption));
+
+app.use("/plantes", planetsRoutes);
+
+app.listen(3000, () => {
+  console.log("Running on port", 3000);
 });
-
-export default app;
