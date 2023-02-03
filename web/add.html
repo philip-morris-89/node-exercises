@@ -30,7 +30,7 @@
 
         const formData = new FormData(form);
         const plainFormData = Object.fromEntries(formData.entries());
-        const fromDataJsonString = JSON.stringify(plainFormData);
+        const formDataJsonString = JSON.stringify(plainFormData);
 
         const url = form.action;
 
@@ -39,7 +39,7 @@
           headers: {
             "Content-Type": "application/json",
           },
-          body: fromDataJsonString,
+          body: formDataJsonString,
         });
 
         const planet = await response.json();

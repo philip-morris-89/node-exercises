@@ -35,8 +35,10 @@
     "express-async-errors": "^3.1.1",
     "figlet": "^1.5.2",
     "cors": "^2.8.5",
+    "express-json-validator-middleware": "^3.0.1",
     "mime": "^3.0.0",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "ajv-formats": "^2.1.1"
   },
   "devDependencies": {
     "@tsconfig/node18": "^1.0.1",
